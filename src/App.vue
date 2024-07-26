@@ -1,21 +1,28 @@
 <script>
+
+//COMPOSITION API
+import { ref } from 'vue'
+
 export default {
-  data() {
-    return {
-      name: "Caio Vieira",
-      status: "active",
-      tasks: [`Task one`, `Task two`, `Task three`],
-      link: `https://google.com`
-    };
-  },
-  methods: {
-    toggleStatus(){
-      if(this.status == `active`)
-        this.status = `pending`
-      else if(this.status == `pending`)
-        this.status = `inactive`
+  setup() {
+    const name = ref('John Doe');
+    const status = ref('active');
+    const tasks = ref(['Task one', 'Task two', 'Task three']);
+
+    const toggleStatus = () => {
+      if(status.value == `active`)
+        status.value = `pending`
+      else if(status.value == `pending`)
+        status.value = `inactive`
       else
-        this.status = `active`
+        status.value = `active`
+    }
+
+    return {
+      name,
+      status,
+      tasks,
+      toggleStatus
     }
   }
 };
@@ -32,7 +39,10 @@ export default {
     <li v-for="task in tasks" :key="task">{{ task }}</li>
   </ul>
 
-  <a :href="link">Click for Google</a>
-
   <button v-on:click="toggleStatus">Change Status</button>
 </template>
+
+
+
+
+
